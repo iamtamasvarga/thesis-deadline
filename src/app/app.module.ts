@@ -5,13 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 
 import { DeadlineTogglerComponent } from './components/deadline-toggler/deadline-toggler.component';
+import { DonateComponent } from './components/donate/donate.component';
 
 import { NgToggleModule } from 'ng-toggle-button';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DeadlineTogglerComponent
+    DeadlineTogglerComponent,
+    DonateComponent
   ],
   imports: [
     BrowserModule,
