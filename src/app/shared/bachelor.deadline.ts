@@ -1,4 +1,6 @@
-export const deadlines: Deadline[] = [
+import { Deadline } from "@models/deadline.model";
+
+export const bachelorDeadlines: Deadline[] = [
     {
       milestone: 1,
       deadline_date: new Date("30 Oct, 2022 23:59:59"),

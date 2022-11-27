@@ -1,21 +1,21 @@
-<div class="container">
+<div class="container" *ngIf="counterModel !== null">
   <div id="timer">
     <div class="days">
-      <div class="numbers">{{ days }}</div>
+      <div class="numbers">{{ counterModel.days }}</div>
       days
     </div>
     <div class="hours">
-      <div class="numbers">{{ hours }}</div>
+      <div class="numbers">{{ counterModel.hours }}</div>
       hours
     </div>
     <div class="minutes">
-      <div class="numbers">{{ minutes }}</div>
+      <div class="numbers">{{ counterModel.minutes }}</div>
       minutes
     </div>
     <div class="seconds">
-      <div class="numbers">{{ seconds }}</div>
+      <div class="numbers">{{ counterModel.seconds }}</div>
       seconds
     </div>
   </div>
-  <h1>{{ deadline }}</h1>
+  <h1>{{ counterModel.deadline_milestone }}</h1>
 </div>
