@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:900");
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
+
+$font: "Lato", sans-serif;
+$big: "Montserrat", sans-serif;
+
+$green: #2ecc71;
+$yellow: #f1c40f;
+$orange: #e67e22;
+$light: #ecf0f1;
+$deadlineRed: #eb4d4b;
+$red: #e74c3c;
+
+:host {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+.ad {
+  display: none;
+}
+
+h1 {
+  font-family: $font;
+  text-align: center;
+  margin-top: 2em;
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: $deadlineRed;
+}
+
+#timer {
+  color: $light;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: $font;
+  font-size: 0.7em;
+  letter-spacing: 5px;
+}
+
+.days,
+.hours,
+.minutes,
+.seconds {
+  background: $green;
+}
+
+.days,
+.hours,
+.minutes,
+.seconds {
+  display: inline-block;
+  padding: 20px;
+  margin: 5px;
+  width: 100px;
+  border-radius: 5px;
+}
+
+.days {
+  background: $green;
+}
+
+.hours {
+  background: $yellow;
+  color: $light;
+}
+
+.minutes {
+  background: $orange;
+}
+
+.seconds {
+  background: $red;
+  .numbers {
+  }
+}
+
+.numbers {
+  font-family: $big;
+  color: $light;
+  font-size: 4em;
+}
+
+.a {
+  color: -webkit-link;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.clicked {
+  color: #551a8b;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+// @media only screen and (max-width: 600px) {
+//   .content {
+//     display: none;
+//   }
+// }

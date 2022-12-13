@@ -21,8 +21,6 @@ export class Counter {
       return null;
     }
 
-    console.log(this.deadlines);
-
     const today: number = new Date().getTime();
     const diff = this.current_deadline.deadline_date.getTime() - today;
 

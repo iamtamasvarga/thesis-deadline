@@ -26,6 +26,7 @@ export class DeadlineTogglerComponent implements OnInit {
       try
       {
         this.deadlineType = parseStringToBool(value);
+        this.toggleHandler();
       }
       catch(e: unknown)
       {
