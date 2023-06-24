@@ -13,33 +13,36 @@ import { masterDeadlines } from '@shared/master.deadline';
 export class CounterComponent implements OnInit {
   @Input() set deadlineTypeInput(deadlineTypeInput: boolean) {
     this.deadlineType = deadlineTypeInput;
-    
+
     if (this.deadlineType) this.currentDeadline = this.masterDeadlines;
     else this.currentDeadline = this.bachelorDeadlines;
 
     this.counter.changeDeadlines(this.currentDeadline);
   }
-  
+
   deadlineType: boolean = false;
   private readonly bachelorDeadlines: Deadline[] = bachelorDeadlines;
   private readonly masterDeadlines: Deadline[] = masterDeadlines;
   currentDeadline: Deadline[];
   private readonly counter: Counter;
   counterModel: CounterModel | null = null;
+  loadingCounter: boolean = true;
 
   constructor() {
     if (this.deadlineType) this.currentDeadline = this.masterDeadlines;
     else this.currentDeadline = this.bachelorDeadlines;
 
     this.counter = new Counter(this.currentDeadline);
-    console.log(this.counter)
 
-    setInterval(() =>this.getCounter(), 1000);
+    setInterval(() => this.getCounter(), 1000);
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   private getCounter(): void {
+    if (this.loadingCounter)
+      this.loadingCounter = false;
+
     this.counterModel = this.counter.getCounter();
   }
 }
