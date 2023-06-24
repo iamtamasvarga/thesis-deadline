@@ -1,3 +1,5 @@
+import { Deadline } from "@models/deadline.model";
+
 export const masterDeadlines: Deadline[] = [
     {
       milestone: 1,
