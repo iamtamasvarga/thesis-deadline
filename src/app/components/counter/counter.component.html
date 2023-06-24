@@ -1,4 +1,4 @@
-<div class="container center" *ngIf="counterModel !== null">
+<div class="container center" *ngIf="counterModel !== null else noDeadline">
   <div id="timer">
     <div class="days">
       <div class="numbers">{{ counterModel.days }}</div>
@@ -19,3 +19,8 @@
   </div>
   <h1>Milestone: {{ counterModel.deadline_milestone }}</h1>
 </div>
+<ng-template #noDeadline>
+  <div class="container center noDeadline">
+    IT'S OVER
+  </div>
+</ng-template>

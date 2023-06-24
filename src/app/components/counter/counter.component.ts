@@ -32,6 +32,7 @@ export class CounterComponent implements OnInit {
     else this.currentDeadline = this.bachelorDeadlines;
 
     this.counter = new Counter(this.currentDeadline);
+    console.log(this.counter)
 
     setInterval(() =>this.getCounter(), 1000);
   }

@@ -23,6 +23,7 @@ export const bachelorDeadlines: Deadline[] = [
     },
     {
       milestone: 6,
-      deadline_date: new Date("14 May, 2023 23:59:59"),
+      deadline_date: new Date("14 May, 2024 23:59:59"),
+      // deadline_date: new Date("14 May, 2023 23:59:59"),
     },
   ];
