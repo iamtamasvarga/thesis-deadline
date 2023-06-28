@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { DonateComponent } from '@components/donate/donate.component';
 import { CounterComponent } from '@components/counter/counter.component';
+import { SettingsComponent } from '@components/settings/settings.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { DeadlinePageComponent } from './pages/deadline-page/deadline-page.component';
 import { DeadlineTogglerComponent } from '@components/deadline-toggler/deadline-toggler.component';
@@ -18,7 +19,8 @@ import { NgToggleModule } from 'ng-toggle-button';
     DonateComponent,
     MainLayoutComponent,
     DeadlinePageComponent,
-    CounterComponent
+    CounterComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

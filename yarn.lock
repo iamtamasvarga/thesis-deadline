@@ -1282,6 +1282,20 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
+"@ng-icons/core@^25.1.0":
+  version "25.1.0"
+  resolved "https://registry.yarnpkg.com/@ng-icons/core/-/core-25.1.0.tgz#71f02c042492b30d322a933f8514fea725128620"
+  integrity sha512-odZhHaIv/AtZBpkQI3RHgZwpPAfUD55bDche4fADfQmUbF8vWUCHJp81G4wk7pi57IajJTm095a1xjn4CFK6yw==
+  dependencies:
+    tslib "^2.2.0"
+
+"@ng-icons/heroicons@^25.1.0":
+  version "25.1.0"
+  resolved "https://registry.yarnpkg.com/@ng-icons/heroicons/-/heroicons-25.1.0.tgz#61945f080b1ee42743d409ee84e7052a16fd7816"
+  integrity sha512-m4lFu44MbNx8yEy3EUuOTUH0X3e+SJF/6Qt3b3gMz43sDEihZCGMQJxynDWxM8lpaaGjA0dU0lyMwZdEAsU2Ww==
+  dependencies:
+    tslib "^2.2.0"
+
 "@ngtools/webpack@13.3.9":
   version "13.3.9"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-13.3.9.tgz#31618a43095f9dee96ece9014c3f10a097914633"
@@ -6164,6 +6178,11 @@ tslib@^2.0.0, tslib@^2.1.0, tslib@^2.3.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
+
+tslib@^2.2.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.0.tgz#b295854684dbda164e181d259a22cd779dcd7bc3"
+  integrity sha512-7At1WUettjcSRHXCyYtTselblcHl9PJFFVKiCAy/bY97+BPZXSQ2wbq0P9s8tK2G7dFQfNnlJnPAiArVBVBsfA==
 
 type-fest@^0.21.3:
   version "0.21.3"
