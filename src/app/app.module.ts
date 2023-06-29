@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { DeadlinePageComponent } from './pages/deadline-page/deadline-page.compo
 import { DeadlineTogglerComponent } from '@components/deadline-toggler/deadline-toggler.component';
 
 import { NgToggleModule } from 'ng-toggle-button';
+import { NgHeroiconsModule } from "@dimaslz/ng-heroicons";
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { NgToggleModule } from 'ng-toggle-button';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
+    NgHeroiconsModule,
     NgToggleModule.forRoot()
   ],
   providers: [],

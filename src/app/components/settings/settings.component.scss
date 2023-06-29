@@ -1,6 +1,11 @@
 div {
     position: absolute;
-    left: 50%;
-    top: 80%;
-    transform: translate(-50%,-50%);
+    right: 2.5%;
+    top: 2.5%;
+    background-color: #f1c40f;
+    border-radius: 50%;
+
+    .settings-button {
+      display: flex;
+    }
 }
