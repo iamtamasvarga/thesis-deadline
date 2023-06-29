@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { heroCog6Tooth } from '@ng-icons/heroicons/outline';
+// import { NgIconComponent, provideIcons } from '@ng-icons/core';
+// import { heroCog6Tooth } from '@ng-icons/heroicons/outline';
 
 
 @Component({
