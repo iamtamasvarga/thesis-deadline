@@ -11,7 +11,11 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { DeadlinePageComponent } from './pages/deadline-page/deadline-page.component';
 import { DeadlineTogglerComponent } from '@components/deadline-toggler/deadline-toggler.component';
 
+import { DialogModule } from 'primeng/dialog';
+import { TooltipModule } from 'primeng/tooltip';
+import { CheckboxModule } from 'primeng/checkbox';
 import { NgToggleModule } from 'ng-toggle-button';
+import { DropdownModule } from 'primeng/dropdown';
 import { NgHeroiconsModule } from "@dimaslz/ng-heroicons";
 
 @NgModule({
@@ -28,7 +32,11 @@ import { NgHeroiconsModule } from "@dimaslz/ng-heroicons";
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    CheckboxModule,
     NgHeroiconsModule,
+    DialogModule,
+    TooltipModule,
+    DropdownModule,
     NgToggleModule.forRoot()
   ],
   providers: [],

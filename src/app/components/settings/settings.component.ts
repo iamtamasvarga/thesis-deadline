@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import {Degree} from '@models/degree.enum'
 
 @Component({
   selector: 'app-settings',
@@ -16,12 +17,25 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 export class SettingsComponent implements OnInit {
   state: string = 'default';
+  defaultDeadlines: boolean = true;
+  selectedDegree: Degree = Degree.UNDEFINED;
+  availableDegrees: Degree[] = [];
+
     rotate() {
         this.state = (this.state === 'default' ? 'rotated' : 'default');
     }
-  constructor() { }
+    visible: boolean = true;
+
+  constructor() {
+    this.availableDegrees = Object.values(Degree).map(item => item as Degree);
+  }
 
   ngOnInit() {
+  }
+
+  showDialog() {
+    this.rotate();
+    this.visible = true;
   }
 
 }
