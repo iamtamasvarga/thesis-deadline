@@ -17,9 +17,10 @@ import {Degree} from '@models/degree.enum'
 })
 export class SettingsComponent implements OnInit {
   state: string = 'default';
-  defaultDeadlines: boolean = true;
+  defaultDeadlines: boolean = false; //cache
   selectedDegree: Degree = Degree.INF;
   availableDegrees: Degree[] = [];
+  noDeadlines: number = 1; //cache
 
     rotate() {
         this.state = (this.state === 'default' ? 'rotated' : 'default');

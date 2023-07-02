@@ -16,7 +16,9 @@ import { TooltipModule } from 'primeng/tooltip';
 import { CheckboxModule } from 'primeng/checkbox';
 import { NgToggleModule } from 'ng-toggle-button';
 import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
 import { NgHeroiconsModule } from "@dimaslz/ng-heroicons";
+
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { NgHeroiconsModule } from "@dimaslz/ng-heroicons";
     DialogModule,
     TooltipModule,
     DropdownModule,
+    InputNumberModule,
     NgToggleModule.forRoot()
   ],
   providers: [],

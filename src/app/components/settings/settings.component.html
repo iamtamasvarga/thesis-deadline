@@ -11,8 +11,21 @@
       <p-dropdown [options]="availableDegrees" [(ngModel)]="selectedDegree"></p-dropdown>
     </div>
     <ng-template #customDeadline>
-      <div>
-
+      <div class="custom-deadline-container">
+        <p-inputNumber
+            class="form-control-inputnumber"
+            [(ngModel)]="noDeadlines"
+            [showButtons]="true"
+            buttonLayout="horizontal"
+            inputId="horizontal"
+            spinnerMode="horizontal"
+            [step]="1"
+            [min]="1"
+            decrementButtonClass="p-button-danger"
+            incrementButtonClass="p-button-success"
+            incrementButtonIcon="pi pi-plus"
+            decrementButtonIcon="pi pi-minus"
+        ></p-inputNumber>
       </div>
     </ng-template>
   </div>
