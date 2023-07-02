@@ -1,24 +1,26 @@
 .settings-button-container {
-    position: absolute;
-    right: 2.5%;
-    top: 2.5%;
-    background-color: #f1c40f;
-    border-radius: 50%;
-    cursor: pointer;
+  position: absolute;
+  right: 2.5%;
+  top: 2.5%;
+  background-color: #f1c40f;
+  border-radius: 50%;
+  cursor: pointer;
 
-    .settings-button {
-      display: flex;
-    }
+  .settings-button {
+    display: flex;
+  }
 }
 
-.dialog-content {
-  padding-top: 1em;
+.dialog {
+  .dialog-content {
+    padding-top: 1em;
 
-  @media only screen and (min-width: 64em) { //1024px
-    padding-top: 0;
-  }
+    @media only screen and (min-width: 64em) {
+      //1024px
+      padding-top: 0;
+    }
 
-  .checkbox {
-
+    .checkbox {
+    }
   }
 }

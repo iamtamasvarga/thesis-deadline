@@ -1,14 +1,14 @@
 <div class="settings-button-container" (click)="showDialog()">
   <cog-8-tooth-outline-icon [@rotatedState]='state' [size]=48 class="settings-button"></cog-8-tooth-outline-icon>
 </div>
-<p-dialog header="Settings" [(visible)]="visible" [style]="{width: '30vw'}" [(visible)]="visible" [breakpoints]="{ '1024px': '75vw' }" [modal]="true">
+<p-dialog header="Settings" [(visible)]="visible" class="dialog" [style]="{width: '30vw'}" [(visible)]="visible" [breakpoints]="{ '1024px': '75vw' }" [modal]="true">
   <div class="dialog-content">
     <div class="checkbox">
       <p-checkbox [(ngModel)]="defaultDeadlines" [binary]="true" label="Default deadlines"></p-checkbox>
       <question-mark-circle-outline-icon [size]=16 pTooltip="TUKE only"></question-mark-circle-outline-icon>
     </div>
     <div *ngIf="defaultDeadlines; else customDeadline">
-      <!-- <p-dropdown [options]="availableDegrees" [(ngModel)]="selectedDegree" optionLabel="name"></p-dropdown> -->
+      <p-dropdown [options]="availableDegrees" [(ngModel)]="selectedDegree"></p-dropdown>
     </div>
     <ng-template #customDeadline>
       <div>

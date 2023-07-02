@@ -18,7 +18,7 @@ import {Degree} from '@models/degree.enum'
 export class SettingsComponent implements OnInit {
   state: string = 'default';
   defaultDeadlines: boolean = true;
-  selectedDegree: Degree = Degree.UNDEFINED;
+  selectedDegree: Degree = Degree.INF;
   availableDegrees: Degree[] = [];
 
     rotate() {
@@ -27,7 +27,7 @@ export class SettingsComponent implements OnInit {
     visible: boolean = true;
 
   constructor() {
-    this.availableDegrees = Object.values(Degree).map(item => item as Degree);
+    this.availableDegrees = Object.values(Degree);
   }
 
   ngOnInit() {

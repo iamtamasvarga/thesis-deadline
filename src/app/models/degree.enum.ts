@@ -1,3 +1,3 @@
 export enum Degree {
-  INF, UNDEFINED
+  INF = "Informatics"
 }
