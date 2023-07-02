@@ -2,7 +2,7 @@ export enum KEYS {
     DEADLINE_TOGGLE = "DEADLINE_TOGGLE"
 }
 
-export const parseStringToBool = (value: string): boolean => 
+export const parseStringToBool = (value: string): boolean =>
 {
     const tempValue = value.toLowerCase();
 
@@ -12,4 +12,8 @@ export const parseStringToBool = (value: string): boolean =>
         return false;
 
     throw new Error(`${value} is not a type of bool`);
+}
+
+export class BreakPointsPx {
+  static readonly DESKTOP = 1024;
 }
