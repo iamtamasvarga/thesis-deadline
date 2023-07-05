@@ -25,7 +25,7 @@ export class SettingsComponent implements OnInit {
     rotate() {
         this.state = (this.state === 'default' ? 'rotated' : 'default');
     }
-    visible: boolean = true;
+    visible: boolean = true; //false
 
   constructor() {
     this.availableDegrees = Object.values(Degree);
