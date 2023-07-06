@@ -19,17 +19,31 @@
     flex-direction: column;
     gap: 1em;
     position: relative;
+    align-items: baseline;
 
-    @media only screen and (min-width: 64em) {
-      //1024px
+    @media only screen and (min-width: 30em) {
       padding-top: 0;
+      align-items: center;
+    }
+
+    .custom-deadline-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+
+      p-button {
+        align-self: center;
+      }
     }
 
   }
 }
 
 :host ::ng-deep input.p-inputnumber-input {
-  width: 1em !important;
+  width: 100% !important;
+  .p-inputnumber {
+    display: flex !important;
+  }
 
   @media only screen and (min-width: 64em) {
     //1024px

@@ -11,6 +11,7 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { DeadlinePageComponent } from './pages/deadline-page/deadline-page.component';
 import { DeadlineTogglerComponent } from '@components/deadline-toggler/deadline-toggler.component';
 
+import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { TooltipModule } from 'primeng/tooltip';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -40,6 +41,7 @@ import { NgHeroiconsModule } from "@dimaslz/ng-heroicons";
     TooltipModule,
     DropdownModule,
     InputNumberModule,
+    ButtonModule,
     NgToggleModule.forRoot()
   ],
   providers: [],

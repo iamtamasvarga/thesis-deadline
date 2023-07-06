@@ -21,6 +21,7 @@ export class SettingsComponent implements OnInit {
   selectedDegree: Degree = Degree.INF;
   availableDegrees: Degree[] = [];
   noDeadlines: number = 1; //cache
+  customDeadlines: Date[] = [];
 
     rotate() {
         this.state = (this.state === 'default' ? 'rotated' : 'default');
@@ -39,4 +40,15 @@ export class SettingsComponent implements OnInit {
     this.visible = true;
   }
 
+  nextDeadline() {
+
+  }
+
+  previousDeadline() {
+
+  }
+
+  submitNoDeadlines() {
+    console.log(this.noDeadlines);
+  }
 }
