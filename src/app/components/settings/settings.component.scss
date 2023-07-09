@@ -14,16 +14,18 @@
 .dialog {
   .dialog-content {
     padding-top: 1em;
-    height: 50vh;
     display: flex;
     flex-direction: column;
     gap: 1em;
     position: relative;
     align-items: baseline;
+    height: 30vh;
 
     @media only screen and (min-width: 30em) {
       padding-top: 0;
+      height: 15vh;
       align-items: center;
+      // justify-content: center;
     }
 
     .custom-deadline-container {
@@ -35,7 +37,6 @@
         align-self: center;
       }
     }
-
   }
 }
 

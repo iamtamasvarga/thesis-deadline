@@ -1,8 +1,9 @@
 <div class="settings-button-container" (click)="showDialog()">
   <cog-8-tooth-outline-icon [@rotatedState]='state' [size]=48 class="settings-button"></cog-8-tooth-outline-icon>
 </div>
-<p-dialog header="Settings" [(visible)]="visible" class="dialog" [style]="{width: '30vw'}" [(visible)]="visible" [breakpoints]="{ '1024px': '75vw' }" [modal]="true">
-  <div class="dialog-content">
+<p-dialog header="Settings" [(visible)]="visible" class="dialog" [style]="{width: '30vw'}" [(visible)]="visible"
+  [breakpoints]="{ '1024px': '75vw' }" [modal]="true">
+  <div class="dialog-content" *ngIf="customDeadlineState == CustomDeadlineStateEnum.UNDEFINED">
     <div class="checkbox">
       <p-checkbox [(ngModel)]="defaultDeadlines" [binary]="true" label="Default deadlines"></p-checkbox>
       <question-mark-circle-outline-icon [size]=16 pTooltip="TUKE only"></question-mark-circle-outline-icon>
@@ -12,21 +13,20 @@
     </div>
     <ng-template #customDeadline>
       <div class="custom-deadline-container">
-        <p-inputNumber
-            [(ngModel)]="noDeadlines"
-            [showButtons]="true"
-            buttonLayout="horizontal"
-            inputId="horizontal"
-            spinnerMode="horizontal"
-            [step]="1"
-            [min]="1"
-            decrementButtonClass="p-button-danger"
-            incrementButtonClass="p-button-success"
-            incrementButtonIcon="pi pi-plus"
-            decrementButtonIcon="pi pi-minus"
-        ></p-inputNumber>
+        <p-inputNumber [(ngModel)]="noDeadlines" [showButtons]="true" buttonLayout="horizontal" inputId="horizontal"
+          spinnerMode="horizontal" [step]="1" [min]="1" decrementButtonClass="p-button-danger"
+          incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
+          decrementButtonIcon="pi pi-minus"></p-inputNumber>
         <p-button label="Submit" (click)="submitNoDeadlines()"></p-button>
       </div>
     </ng-template>
+  </div>
+  <div *ngIf="customDeadlineState === CustomDeadlineStateEnum.SUBMITTED">
+    <div class="dialog-content">
+      SUBMITTED
+    </div>
+  </div>
+  <div *ngIf="customDeadlineState === CustomDeadlineStateEnum.CREATED">
+    SUBMITTED
   </div>
 </p-dialog>

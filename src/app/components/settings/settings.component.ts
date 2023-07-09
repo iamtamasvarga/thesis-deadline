@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import {Degree} from '@models/degree.enum'
 
+export enum CustomDeadlineState {
+  UNDEFINED, SUBMITTED, CREATED
+}
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -22,11 +26,13 @@ export class SettingsComponent implements OnInit {
   availableDegrees: Degree[] = [];
   noDeadlines: number = 1; //cache
   customDeadlines: Date[] = [];
+  visible: boolean = true; //false
+  customDeadlineState: CustomDeadlineState = CustomDeadlineState.UNDEFINED;
+  CustomDeadlineStateEnum = CustomDeadlineState;
 
-    rotate() {
-        this.state = (this.state === 'default' ? 'rotated' : 'default');
-    }
-    visible: boolean = true; //false
+  rotate() {
+      this.state = (this.state === 'default' ? 'rotated' : 'default');
+  }
 
   constructor() {
     this.availableDegrees = Object.values(Degree);
@@ -49,6 +55,15 @@ export class SettingsComponent implements OnInit {
   }
 
   submitNoDeadlines() {
-    console.log(this.noDeadlines);
+    this.customDeadlineState = CustomDeadlineState.SUBMITTED;
+    console.log(this.customDeadlineState);
+  }
+
+  cancelCustomDeadline() {
+    this.customDeadlineState = CustomDeadlineState.UNDEFINED;
+  }
+
+  createCustomDeadline() {
+    this.customDeadlineState = CustomDeadlineState.CREATED;
   }
 }
