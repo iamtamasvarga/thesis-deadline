@@ -14,6 +14,7 @@ import { DeadlineTogglerComponent } from '@components/deadline-toggler/deadline-
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { TooltipModule } from 'primeng/tooltip';
+import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
 import { NgToggleModule } from 'ng-toggle-button';
 import { DropdownModule } from 'primeng/dropdown';
@@ -42,6 +43,7 @@ import { NgHeroiconsModule } from "@dimaslz/ng-heroicons";
     DropdownModule,
     InputNumberModule,
     ButtonModule,
+    CalendarModule,
     NgToggleModule.forRoot()
   ],
   providers: [],

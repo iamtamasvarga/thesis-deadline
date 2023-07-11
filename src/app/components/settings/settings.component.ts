@@ -26,6 +26,7 @@ export class SettingsComponent implements OnInit {
   availableDegrees: Degree[] = [];
   noDeadlines: number = 1; //cache
   customDeadlines: Date[] = [];
+  currentDate: Date | undefined;
   visible: boolean = true; //false
   customDeadlineState: CustomDeadlineState = CustomDeadlineState.UNDEFINED;
   CustomDeadlineStateEnum = CustomDeadlineState;
