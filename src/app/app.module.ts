@@ -20,6 +20,7 @@ import { NgToggleModule } from 'ng-toggle-button';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { NgHeroiconsModule } from "@dimaslz/ng-heroicons";
+import { OrdinalPipe } from '@shared/ordinal.pipe';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { NgHeroiconsModule } from "@dimaslz/ng-heroicons";
     MainLayoutComponent,
     DeadlinePageComponent,
     CounterComponent,
-    SettingsComponent
+    SettingsComponent,
+    OrdinalPipe
   ],
   imports: [
     BrowserModule,

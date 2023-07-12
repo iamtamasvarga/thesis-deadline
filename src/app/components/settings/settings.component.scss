@@ -37,6 +37,24 @@
         align-self: center;
       }
     }
+
+    .custom-deadline-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+
+    .custom-deadline-navigation {
+      display: inline-flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .ordinal-container {
+      .ordinal {
+        font-weight: bold;
+      }
+    }
   }
 }
 

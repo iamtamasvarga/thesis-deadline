@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import {Degree} from '@models/degree.enum'
+import { Degree } from '@models/degree.enum'
+import { TrashSolidIconComponent } from '@dimaslz/ng-heroicons';
 
 export enum CustomDeadlineState {
   UNDEFINED, SUBMITTED, CREATED
@@ -24,15 +25,18 @@ export class SettingsComponent implements OnInit {
   defaultDeadlines: boolean = false; //cache
   selectedDegree: Degree = Degree.INF;
   availableDegrees: Degree[] = [];
-  noDeadlines: number = 1; //cache
+  visible: boolean = true; //false
+
+  customDeadlineState: CustomDeadlineState = CustomDeadlineState.SUBMITTED; //cache
+  minDate: Date = new Date();
+  CustomDeadlineStateEnum = CustomDeadlineState;
+  noDeadlines: number = 3; //cache
   customDeadlines: Date[] = [];
   currentDate: Date | undefined;
-  visible: boolean = true; //false
-  customDeadlineState: CustomDeadlineState = CustomDeadlineState.UNDEFINED;
-  CustomDeadlineStateEnum = CustomDeadlineState;
+  deadlineIndex: number = 1;
 
   rotate() {
-      this.state = (this.state === 'default' ? 'rotated' : 'default');
+    this.state = (this.state === 'default' ? 'rotated' : 'default');
   }
 
   constructor() {
@@ -48,11 +52,21 @@ export class SettingsComponent implements OnInit {
   }
 
   nextDeadline() {
+    if (this.deadlineIndex >= this.noDeadlines)
+      return;
 
+    if(this.currentDate) {
+      this.customDeadlines.push(this.currentDate);
+      this.currentDate = undefined;
+      this.deadlineIndex++;
+    }
   }
 
   previousDeadline() {
+    if (this.deadlineIndex <= 1)
+      return;
 
+    this.deadlineIndex--;
   }
 
   submitNoDeadlines() {
@@ -62,9 +76,41 @@ export class SettingsComponent implements OnInit {
 
   cancelCustomDeadline() {
     this.customDeadlineState = CustomDeadlineState.UNDEFINED;
+    this.resetCustomDeadlines();
   }
 
-  createCustomDeadline() {
-    this.customDeadlineState = CustomDeadlineState.CREATED;
+  createCustomDeadlines() {
+    throw new Error('Method not implemented.');
+  }
+
+  resetCustomDeadlines() {
+    this.deadlineIndex = 1;
+    this.customDeadlines = [];
+    this.currentDate = undefined;
+  }
+
+  IsDateDefined() {
+    if (this.deadlineIndex == 1) {
+      return this.currentDate === undefined;
+    }
+    else if(this.deadlineIndex >= this.noDeadlines) {
+      if(!this.currentDate)
+        return true;
+
+      let previousDate = this.customDeadlines.pop();
+
+      if(!previousDate)
+        return true;
+
+      return this.currentDate > previousDate;
+    }
+
+    return true;
   }
 }
+
+// TODO:
+// -  min date for each iteration (prev/next)
+// -  IsDateDefined - correct
+// -  remove form
+// -  check responsiveness
