@@ -33,7 +33,9 @@ export class SettingsComponent implements OnInit {
   noDeadlines: number = 3; //cache
   customDeadlines: Date[] = [];
   currentDate: Date | undefined;
-  deadlineIndex: number = 1;
+  deadlineIndex: number = 0;
+  nextButtonDisabled = false;
+  prevButtonDisabled = false;
 
   rotate() {
     this.state = (this.state === 'default' ? 'rotated' : 'default');
@@ -44,6 +46,9 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit() {
+    // setInterval(() => console.log(this.nextButtonDisabled), 1000);
+    setInterval(() => console.log(this.customDeadlines), 1000);
+    setInterval(() => console.log(this.deadlineIndex), 1000);
   }
 
   showDialog() {
@@ -52,21 +57,58 @@ export class SettingsComponent implements OnInit {
   }
 
   nextDeadline() {
-    if (this.deadlineIndex >= this.noDeadlines)
+    if (this.deadlineIndex >= this.noDeadlines - 1) {
+      console.log("out of upper range");
       return;
-
-    if(this.currentDate) {
-      this.customDeadlines.push(this.currentDate);
-      this.currentDate = undefined;
-      this.deadlineIndex++;
     }
+
+    if (!this.currentDate) {
+      console.log("no value selected");
+      return;
+    }
+
+    if (this.deadlineIndex < this.customDeadlines.length) {
+      if(this.currentDate != this.customDeadlines[this.deadlineIndex]) {
+        console.log("value changed");
+        this.customDeadlines[this.deadlineIndex] = this.currentDate;
+        this.minDate = new Date();
+        this.minDate.setDate(this.currentDate.getDate() + 1);
+        this.deadlineIndex++;
+        this.customDeadlines = this.customDeadlines.slice(0, this.deadlineIndex);
+        this.currentDate = undefined;
+      }
+      else {
+        console.log("found a value");
+        this.deadlineIndex++;
+        this.currentDate = this.customDeadlines[this.deadlineIndex];
+        this.minDate = this.currentDate;
+      }
+    }
+    else {
+      console.log("added new value");
+      this.customDeadlines[this.deadlineIndex] = this.currentDate;
+      this.deadlineIndex++;
+      this.minDate = new Date();
+      this.minDate.setDate(this.currentDate.getDate() + 1);
+      this.currentDate = undefined;
+    }
+
   }
 
   previousDeadline() {
-    if (this.deadlineIndex <= 1)
+    if (this.deadlineIndex <= 0) {
+      console.log("out of lower range")
       return;
+    }
 
+    console.log("getting last value")
     this.deadlineIndex--;
+    this.currentDate = this.customDeadlines[this.deadlineIndex];
+    this.minDate = new Date();
+    if (this.deadlineIndex != 1) {
+      this.minDate.setDate(this.currentDate.getDate() + 1);
+    }
+
   }
 
   submitNoDeadlines() {
@@ -90,27 +132,34 @@ export class SettingsComponent implements OnInit {
   }
 
   IsDateDefined() {
-    if (this.deadlineIndex == 1) {
-      return this.currentDate === undefined;
-    }
-    else if(this.deadlineIndex >= this.noDeadlines) {
-      if(!this.currentDate)
-        return true;
+    this.nextButtonDisabled = false;
+    //   if (this.deadlineIndex == 1) {
+    //     this.nextButtonDisabled = this.currentDate === undefined;
+    //     return;
+    //   }
+    //   else if (this.deadlineIndex >= this.noDeadlines) {
+    //     if (!this.currentDate) {
+    //       this.nextButtonDisabled = true;
+    //       return;
+    //     }
 
-      let previousDate = this.customDeadlines.pop();
+    //     let previousDate = this.customDeadlines.pop();
 
-      if(!previousDate)
-        return true;
+    //     if (!previousDate) {
+    //       this.nextButtonDisabled = true;
+    //       return;
+    //     }
 
-      return this.currentDate > previousDate;
-    }
+    //     this.nextButtonDisabled = this.currentDate > previousDate;
+    //     return;
+    //   }
 
-    return true;
+    //   this.nextButtonDisabled = true;;
   }
 }
 
 // TODO:
-// -  min date for each iteration (prev/next)
-// -  IsDateDefined - correct
+// -  IsDateDefined - correct button disable
 // -  remove form
 // -  check responsiveness
+// -  last date... disable next and show error if not correct... otherwise enable submit

@@ -23,13 +23,13 @@
   </div>
   <div *ngIf="customDeadlineState === CustomDeadlineStateEnum.SUBMITTED">
     <div class="dialog-content">
-      <div class="ordinal-container"><span class="ordinal">{{deadlineIndex | ordinal}}</span> deadline</div>
+      <div class="ordinal-container"><span class="ordinal">{{deadlineIndex + 1 | ordinal}}</span> deadline</div>
       <div class="custom-deadline-form">
-        <p-calendar [(ngModel)]="currentDate" [minDate]="minDate" appendTo="body"></p-calendar>
+        <p-calendar [(ngModel)]="currentDate" [minDate]="minDate" (ngModelChange)="IsDateDefined()" appendTo="body"></p-calendar>
         <div class="custom-deadline-navigation">
-          <p-button icon="pi pi-chevron-left" [disabled]="deadlineIndex <= 1" (click)="previousDeadline()"></p-button>
+          <p-button icon="pi pi-chevron-left" [disabled]="prevButtonDisabled" (click)="previousDeadline()"></p-button>
           <p-button label="Reset" (click)="resetCustomDeadlines()"></p-button>
-          <p-button icon="pi pi-chevron-right" [disabled]="IsDateDefined()" (click)="nextDeadline()"></p-button>
+          <p-button icon="pi pi-chevron-right" [disabled]="nextButtonDisabled" (click)="nextDeadline()"></p-button>
         </div>
         <button pButton pRipple label="Submit" [disabled]="true" class="p-button-success" (click)="createCustomDeadlines()"></button>
         <button pButton pRipple label="Cancel" class="p-button-danger" (click)="cancelCustomDeadline()"></button>
