@@ -163,3 +163,4 @@ export class SettingsComponent implements OnInit {
 // -  remove form
 // -  check responsiveness
 // -  last date... disable next and show error if not correct... otherwise enable submit
+// - remove logs
