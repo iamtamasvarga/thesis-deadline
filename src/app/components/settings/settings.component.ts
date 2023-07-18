@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Degree } from '@models/degree.enum'
-import { TrashSolidIconComponent } from '@dimaslz/ng-heroicons';
+import { ArrowTrendingUpSolidIconComponent, TrashSolidIconComponent } from '@dimaslz/ng-heroicons';
 
 export enum CustomDeadlineState {
   UNDEFINED, SUBMITTED, CREATED
@@ -22,20 +22,21 @@ export enum CustomDeadlineState {
 })
 export class SettingsComponent implements OnInit {
   state: string = 'default';
-  defaultDeadlines: boolean = false; //cache
+  defaultDeadlines: boolean = true; //cache
   selectedDegree: Degree = Degree.INF;
   availableDegrees: Degree[] = [];
-  visible: boolean = true; //false
+  visible: boolean = false;
 
-  customDeadlineState: CustomDeadlineState = CustomDeadlineState.SUBMITTED; //cache
+  customDeadlineState: CustomDeadlineState = CustomDeadlineState.UNDEFINED; //cache
   minDate: Date = new Date();
   CustomDeadlineStateEnum = CustomDeadlineState;
-  noDeadlines: number = 3; //cache
+  noDeadlines: number = 1;
   customDeadlines: Date[] = [];
   currentDate: Date | undefined;
   deadlineIndex: number = 0;
-  nextButtonDisabled = false;
-  prevButtonDisabled = false;
+  nextButtonDisabled = true;
+  prevButtonDisabled = true;
+  submitButtonDisabled = true;
 
   rotate() {
     this.state = (this.state === 'default' ? 'rotated' : 'default');
@@ -46,9 +47,6 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // setInterval(() => console.log(this.nextButtonDisabled), 1000);
-    setInterval(() => console.log(this.customDeadlines), 1000);
-    setInterval(() => console.log(this.deadlineIndex), 1000);
   }
 
   showDialog() {
@@ -58,18 +56,16 @@ export class SettingsComponent implements OnInit {
 
   nextDeadline() {
     if (this.deadlineIndex >= this.noDeadlines - 1) {
-      console.log("out of upper range");
+      // console.log("out of upper range");
       return;
     }
-
-    if (!this.currentDate) {
-      console.log("no value selected");
+    else if (!this.currentDate) {
+      // console.log("no value selected");
       return;
     }
-
-    if (this.deadlineIndex < this.customDeadlines.length) {
-      if(this.currentDate != this.customDeadlines[this.deadlineIndex]) {
-        console.log("value changed");
+    else if (this.deadlineIndex < this.customDeadlines.length) {
+      if (this.currentDate != this.customDeadlines[this.deadlineIndex]) {
+        // console.log("value changed");
         this.customDeadlines[this.deadlineIndex] = this.currentDate;
         this.minDate = new Date();
         this.minDate.setDate(this.currentDate.getDate() + 1);
@@ -78,14 +74,14 @@ export class SettingsComponent implements OnInit {
         this.currentDate = undefined;
       }
       else {
-        console.log("found a value");
+        // console.log("found a value");
         this.deadlineIndex++;
         this.currentDate = this.customDeadlines[this.deadlineIndex];
         this.minDate = this.currentDate;
       }
     }
     else {
-      console.log("added new value");
+      // console.log("added new value");
       this.customDeadlines[this.deadlineIndex] = this.currentDate;
       this.deadlineIndex++;
       this.minDate = new Date();
@@ -93,22 +89,37 @@ export class SettingsComponent implements OnInit {
       this.currentDate = undefined;
     }
 
+    if (this.deadlineIndex >= 1) {
+      this.prevButtonDisabled = false;
+    }
+
+    if (this.deadlineIndex === this.noDeadlines - 1) {
+      this.nextButtonDisabled = true;
+    }
+
   }
 
   previousDeadline() {
     if (this.deadlineIndex <= 0) {
-      console.log("out of lower range")
+      // console.log("out of lower range")
       return;
     }
 
-    console.log("getting last value")
+    // console.log("getting last value")
     this.deadlineIndex--;
     this.currentDate = this.customDeadlines[this.deadlineIndex];
     this.minDate = new Date();
-    if (this.deadlineIndex != 1) {
+    if (this.deadlineIndex != 0) {
       this.minDate.setDate(this.currentDate.getDate() + 1);
     }
 
+    if (this.deadlineIndex == 0) {
+      this.prevButtonDisabled = true;
+    }
+    else if (this.deadlineIndex < this.noDeadlines - 1) {
+      this.nextButtonDisabled = false;
+      this.submitButtonDisabled = true;
+    }
   }
 
   submitNoDeadlines() {
@@ -126,41 +137,27 @@ export class SettingsComponent implements OnInit {
   }
 
   resetCustomDeadlines() {
-    this.deadlineIndex = 1;
+    this.deadlineIndex = 0;
     this.customDeadlines = [];
     this.currentDate = undefined;
+    this.prevButtonDisabled = true;
+    this.nextButtonDisabled = true;
   }
 
   IsDateDefined() {
-    this.nextButtonDisabled = false;
-    //   if (this.deadlineIndex == 1) {
-    //     this.nextButtonDisabled = this.currentDate === undefined;
-    //     return;
-    //   }
-    //   else if (this.deadlineIndex >= this.noDeadlines) {
-    //     if (!this.currentDate) {
-    //       this.nextButtonDisabled = true;
-    //       return;
-    //     }
+    if (this.deadlineIndex === 0) {
+      const correctDate = this.currentDate === undefined ? false : this.minDate < this.currentDate ? true : false;
+      this.nextButtonDisabled = this.noDeadlines == 1 ? true : correctDate;
 
-    //     let previousDate = this.customDeadlines.pop();
+    }
 
-    //     if (!previousDate) {
-    //       this.nextButtonDisabled = true;
-    //       return;
-    //     }
-
-    //     this.nextButtonDisabled = this.currentDate > previousDate;
-    //     return;
-    //   }
-
-    //   this.nextButtonDisabled = true;;
+    if(this.deadlineIndex === this.noDeadlines - 1 && this.currentDate)
+    {
+      this.submitButtonDisabled = false;
+    }
   }
 }
 
 // TODO:
-// -  IsDateDefined - correct button disable
-// -  remove form
 // -  check responsiveness
-// -  last date... disable next and show error if not correct... otherwise enable submit
-// - remove logs
+// -  last date... disable next and show error if not correct... otherwise enable submit (no need, optional)

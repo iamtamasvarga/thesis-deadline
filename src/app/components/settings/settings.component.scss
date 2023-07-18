@@ -19,11 +19,11 @@
     gap: 1em;
     position: relative;
     align-items: baseline;
-    height: 30vh;
+    // height: 30vh;
 
     @media only screen and (min-width: 30em) {
       padding-top: 0;
-      height: 20vh;
+      // height: 20vh;
       align-items: center;
       // justify-content: center;
     }

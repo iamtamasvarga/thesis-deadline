@@ -31,7 +31,7 @@
           <p-button label="Reset" (click)="resetCustomDeadlines()"></p-button>
           <p-button icon="pi pi-chevron-right" [disabled]="nextButtonDisabled" (click)="nextDeadline()"></p-button>
         </div>
-        <button pButton pRipple label="Submit" [disabled]="true" class="p-button-success" (click)="createCustomDeadlines()"></button>
+        <button pButton pRipple label="Submit" [disabled]="submitButtonDisabled" class="p-button-success" (click)="createCustomDeadlines()"></button>
         <button pButton pRipple label="Cancel" class="p-button-danger" (click)="cancelCustomDeadline()"></button>
       </div>
     </div>
