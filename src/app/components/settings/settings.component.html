@@ -5,7 +5,7 @@
   [breakpoints]="{ '1024px': '75vw' }" [modal]="true">
   <div class="dialog-content" *ngIf="customDeadlineState == CustomDeadlineStateEnum.UNDEFINED">
     <div class="checkbox">
-      <p-checkbox [(ngModel)]="defaultDeadlines" [binary]="true" label="Default deadlines"></p-checkbox>
+      <p-checkbox [(ngModel)]="defaultDeadlines" (onChange)="deadlineCheckboxChanged()" [binary]="true" label="Default deadlines"></p-checkbox>
       <question-mark-circle-outline-icon [size]=16 pTooltip="TUKE only"></question-mark-circle-outline-icon>
     </div>
     <div *ngIf="defaultDeadlines; else customDeadline">

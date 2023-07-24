@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Degree } from '@models/degree.enum'
 import { ArrowTrendingUpSolidIconComponent, TrashSolidIconComponent } from '@dimaslz/ng-heroicons';
+import { DeadlineCookieService } from '@services/deadline-cookie.service';
+import { DeadlineType } from '@models/deadline.model';
 
 export enum CustomDeadlineState {
   UNDEFINED, SUBMITTED, CREATED
@@ -42,11 +44,12 @@ export class SettingsComponent implements OnInit {
     this.state = (this.state === 'default' ? 'rotated' : 'default');
   }
 
-  constructor() {
+  constructor(private deadlineCookieService: DeadlineCookieService) {
     this.availableDegrees = Object.values(Degree);
   }
 
   ngOnInit() {
+    this.defaultDeadlines = this.deadlineCookieService.getDeadlineType() == DeadlineType.DEFAULT;
   }
 
   showDialog() {
