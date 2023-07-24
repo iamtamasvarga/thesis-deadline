@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Degree } from '@models/degree.enum'
-import { ArrowTrendingUpSolidIconComponent, TrashSolidIconComponent } from '@dimaslz/ng-heroicons';
 import { DeadlineCookieService } from '@services/deadline-cookie.service';
-import { DeadlineType } from '@models/deadline.model';
-
-export enum CustomDeadlineState {
-  UNDEFINED, SUBMITTED, CREATED
-}
+import { Deadline, DeadlineType, CustomDeadlineState } from '@models/deadline.model';
 
 @Component({
   selector: 'app-settings',
@@ -50,6 +45,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.defaultDeadlines = this.deadlineCookieService.getDeadlineType() == DeadlineType.DEFAULT;
+    this.customDeadlineState = this.deadlineCookieService.getCustomDeadlineStatus() as CustomDeadlineState;
   }
 
   showDialog() {
@@ -127,7 +123,6 @@ export class SettingsComponent implements OnInit {
 
   submitNoDeadlines() {
     this.customDeadlineState = CustomDeadlineState.SUBMITTED;
-    console.log(this.customDeadlineState);
   }
 
   cancelCustomDeadline() {
@@ -136,7 +131,20 @@ export class SettingsComponent implements OnInit {
   }
 
   createCustomDeadlines() {
-    throw new Error('Method not implemented.');
+    if (!this.currentDate)
+      return;
+
+    this.customDeadlines.push(this.currentDate);
+
+    let deadlines: Deadline[] = [];
+
+    for (let i = 0, len = this.customDeadlines.length; i < len; i++) {
+      deadlines.push({ deadline_date: this.customDeadlines[i], milestone: i + 1 });
+    }
+
+    this.deadlineCookieService.setCustomDeadline(deadlines);
+    this.customDeadlineState = CustomDeadlineState.CREATED;
+    this.deadlineCookieService.setCustomDeadlineStatus(this.customDeadlineState);
   }
 
   resetCustomDeadlines() {
@@ -154,13 +162,19 @@ export class SettingsComponent implements OnInit {
 
     }
 
-    if(this.deadlineIndex === this.noDeadlines - 1 && this.currentDate)
-    {
+    if (this.deadlineIndex === this.noDeadlines - 1 && this.currentDate) {
       this.submitButtonDisabled = false;
     }
+  }
+
+  deadlineCheckboxChanged() {
+    this.deadlineCookieService.setDeadlineType(this.defaultDeadlines ? DeadlineType.DEFAULT : DeadlineType.CUSTOM);
   }
 }
 
 // TODO:
 // -  check responsiveness
 // -  last date... disable next and show error if not correct... otherwise enable submit (no need, optional)
+// - delete custom deadline
+// - no custom deadline warning
+// - subscribe to custom deadline event in counter

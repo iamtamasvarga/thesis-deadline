@@ -7,3 +7,7 @@ export interface Deadline
 export enum DeadlineType {
     CUSTOM = "CUSTOM", DEFAULT = "DEFAULT"
 }
+
+export enum CustomDeadlineState {
+  UNDEFINED = "UNDEFINED", SUBMITTED = "SUBMITTED", CREATED = "CREATED"
+}

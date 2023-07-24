@@ -1,7 +1,8 @@
 export enum KEYS {
     DEADLINE_TOGGLE = "DEADLINE_TOGGLE",
     DEADLINE_TYPE = "DEADLINE_TYPE",
-    CUSTOM_DEADLINE = "CUSTOM_DEADLINE"
+    CUSTOM_DEADLINE = "CUSTOM_DEADLINE",
+    CUSTOM_DEADLINE_STATE = "CUSTOM_DEADLINE_STATE"
 }
 
 export const parseStringToBool = (value: string): boolean =>
