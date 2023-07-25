@@ -24,6 +24,7 @@ export class CounterComponent implements OnInit {
   private readonly bachelorDeadlines: Deadline[] = bachelorDeadlines;
   private readonly masterDeadlines: Deadline[] = masterDeadlines;
   currentDeadline: Deadline[];
+  customDeadline: boolean = false; //cache
   private readonly counter: Counter;
   counterModel: CounterModel | null = null;
   loadingCounter: boolean = true;

@@ -35,3 +35,11 @@
     IT'S OVER
   </div>
 </ng-template>
+<ng-template #noCustomDeadline>
+  <div *ngIf="loadingCounter" class="container center noDeadline">
+    LOADING
+  </div>
+  <div *ngIf="!loadingCounter" #noDeadline class="container center noDeadline">
+    IT'S OVER
+  </div>
+</ng-template>
