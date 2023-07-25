@@ -50,20 +50,4 @@ export class Counter {
 
     return null;
   }
-
-  private getMilestoneString(milestione: number) {
-    var j = milestione % 10,
-      k = milestione % 100;
-    if (j == 1 && k != 11) {
-      return milestione + 'st';
-    }
-    if (j == 2 && k != 12) {
-      return milestione + 'nd';
-    }
-    if (j == 3 && k != 13) {
-      return milestione + 'rd';
-    }
-
-    return milestione + 'th';
-  }
 }

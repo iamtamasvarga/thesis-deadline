@@ -2,19 +2,27 @@
   <div id="timer">
     <div class="days">
       <div class="numbers">{{ counterModel.days }}</div>
-      days
+      <div class="text">
+        days
+      </div>
     </div>
     <div class="hours">
       <div class="numbers">{{ counterModel.hours }}</div>
-      hours
+      <div class="text">
+        hours
+      </div>
     </div>
     <div class="minutes">
       <div class="numbers">{{ counterModel.minutes }}</div>
-      minutes
+      <div class="text">
+        minutes
+      </div>
     </div>
     <div class="seconds">
       <div class="numbers">{{ counterModel.seconds }}</div>
-      seconds
+      <div class="text">
+        seconds
+      </div>
     </div>
   </div>
   <h1>Milestone: {{ counterModel.deadline_milestone }}</h1>
@@ -23,7 +31,10 @@
   <div *ngIf="loadingCounter" class="container center noDeadline">
     LOADING
   </div>
-  <div *ngIf="!loadingCounter" #noDeadline class="container center noDeadline">
+  <div *ngIf="!loadingCounter && currentDeadlines.length !== 0" #noDeadline class="container center noDeadline">
     IT'S OVER
+  </div>
+  <div *ngIf="!loadingCounter && customDeadline && currentDeadlines.length === 0" class="container center noDeadline">
+    NO CUSTOM DEADLINE
   </div>
 </ng-template>

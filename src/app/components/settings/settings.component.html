@@ -1,19 +1,42 @@
 <div class="settings-button-container" (click)="showDialog()">
   <cog-8-tooth-outline-icon [@rotatedState]='state' [size]=48 class="settings-button"></cog-8-tooth-outline-icon>
 </div>
-<p-dialog header="Settings" [(visible)]="visible" class="dialog" [style]="{width: '30vw'}" [(visible)]="visible" [breakpoints]="{ '1024px': '75vw' }" [modal]="true">
-  <div class="dialog-content">
+<p-dialog header="Settings" [(visible)]="visible" class="dialog" [style]="{width: '30vw'}" [(visible)]="visible"
+  [breakpoints]="{ '1024px': '75vw' }" [modal]="true">
+  <div class="dialog-content" *ngIf="customDeadlineState == CustomDeadlineStateEnum.UNDEFINED">
     <div class="checkbox">
-      <p-checkbox [(ngModel)]="defaultDeadlines" [binary]="true" label="Default deadlines"></p-checkbox>
+      <p-checkbox [(ngModel)]="defaultDeadlines" (onChange)="deadlineCheckboxChanged()" [binary]="true" label="Default deadlines"></p-checkbox>
       <question-mark-circle-outline-icon [size]=16 pTooltip="TUKE only"></question-mark-circle-outline-icon>
     </div>
     <div *ngIf="defaultDeadlines; else customDeadline">
-      <p-dropdown [options]="availableDegrees" [(ngModel)]="selectedDegree"></p-dropdown>
+      <p-dropdown appendTo="body" [options]="availableDegrees" [(ngModel)]="selectedDegree"></p-dropdown>
     </div>
     <ng-template #customDeadline>
-      <div>
-
+      <div class="custom-deadline-container">
+        <p-inputNumber [(ngModel)]="noDeadlines" [showButtons]="true" buttonLayout="horizontal" inputId="horizontal"
+          spinnerMode="horizontal" [step]="1" [min]="1" decrementButtonClass="p-button-danger"
+          incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
+          decrementButtonIcon="pi pi-minus"></p-inputNumber>
+        <p-button label="Submit" [disabled]="true" (click)="submitNoDeadlines()"></p-button>
       </div>
     </ng-template>
+  </div>
+  <div *ngIf="customDeadlineState === CustomDeadlineStateEnum.SUBMITTED">
+    <div class="dialog-content">
+      <div class="ordinal-container"><span class="ordinal">{{deadlineIndex + 1 | ordinal}}</span> deadline</div>
+      <div class="custom-deadline-form">
+        <p-calendar [(ngModel)]="currentDate" [minDate]="minDate" (ngModelChange)="IsDateDefined()" appendTo="body"></p-calendar>
+        <div class="custom-deadline-navigation">
+          <p-button icon="pi pi-chevron-left" [disabled]="prevButtonDisabled" (click)="previousDeadline()"></p-button>
+          <p-button label="Reset" (click)="resetCustomDeadlines()"></p-button>
+          <p-button icon="pi pi-chevron-right" [disabled]="nextButtonDisabled" (click)="nextDeadline()"></p-button>
+        </div>
+        <button pButton pRipple label="Submit" [disabled]="submitButtonDisabled" class="p-button-success" (click)="createCustomDeadlines()"></button>
+        <button pButton pRipple label="Cancel" class="p-button-danger" (click)="cancelCustomDeadline()"></button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="customDeadlineState === CustomDeadlineStateEnum.CREATED">
+    SUBMITTED
   </div>
 </p-dialog>

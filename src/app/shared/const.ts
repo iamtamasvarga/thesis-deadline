@@ -1,5 +1,9 @@
 export enum KEYS {
-    DEADLINE_TOGGLE = "DEADLINE_TOGGLE"
+    DEADLINE_TOGGLE = "DEADLINE_TOGGLE",
+    DEADLINE_TYPE = "DEADLINE_TYPE",
+    CUSTOM_DEADLINE = "CUSTOM_DEADLINE",
+    CUSTOM_DEADLINE_STATE = "CUSTOM_DEADLINE_STATE",
+    DEFAULT_DEADLINE_TYPE = "DEFAULT_DEADLINE_TYPE"
 }
 
 export const parseStringToBool = (value: string): boolean =>
@@ -16,4 +20,12 @@ export const parseStringToBool = (value: string): boolean =>
 
 export class BreakPointsPx {
   static readonly DESKTOP = 1024;
+  static readonly TABLET = 768;
+  static readonly PHONE = 480;
+}
+
+export class BreakPointsEm {
+  static readonly DESKTOP = 64;
+  static readonly TABLET = 48;
+  static readonly PHONE = 30;
 }

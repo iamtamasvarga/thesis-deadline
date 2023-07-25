@@ -1,5 +1,5 @@
 <div class="content">
-    <app-deadline-toggler (deadlineTypeEvent)="deadlineTypeHandler($event)"></app-deadline-toggler>
-    <app-counter [deadlineTypeInput]="deadlineType"></app-counter>
+    <app-deadline-toggler *ngIf="defaultDeadlines"></app-deadline-toggler>
+    <app-counter></app-counter>
     <app-settings></app-settings>
 </div>
