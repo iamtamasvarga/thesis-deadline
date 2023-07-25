@@ -16,11 +16,15 @@ export class DeadlineCookieService {
 
   constructor(private cookieService: CookieService) { }
 
+  private check(key: string): boolean {
+    return localStorage.getItem(key) !== null;
+  }
+
   getDeadlineType(): DeadlineType {
-    let exists = this.cookieService.check(KEYS.DEADLINE_TYPE);
+    let exists = this.check(KEYS.DEADLINE_TYPE);
 
     if (exists) {
-      return this.cookieService.get(KEYS.DEADLINE_TYPE) as DeadlineType;
+      return localStorage.getItem(KEYS.DEADLINE_TYPE) as DeadlineType;
     }
     else {
       return DeadlineType.DEFAULT;
@@ -28,15 +32,15 @@ export class DeadlineCookieService {
   }
 
   setDeadlineType(deadlinteType: DeadlineType) {
-    this.cookieService.set(KEYS.DEADLINE_TYPE, deadlinteType);
+    localStorage.setItem(KEYS.DEADLINE_TYPE, deadlinteType);
     this.cookieChanged.next(CookieChangedEvent.DEADLINE_TYPE);
   }
 
   getCustomDeadline(): Deadline[] {
-    let exists = this.cookieService.check(KEYS.CUSTOM_DEADLINE);
+    let exists = this.check(KEYS.CUSTOM_DEADLINE);
 
     if (exists) {
-      const customDeadline = this.cookieService.get(KEYS.CUSTOM_DEADLINE);
+      const customDeadline = localStorage.getItem(KEYS.CUSTOM_DEADLINE) as string;
       return JSON.parse(customDeadline);
     }
     else {
@@ -45,20 +49,20 @@ export class DeadlineCookieService {
   }
 
   setCustomDeadline(deadline: Deadline[]) {
-    this.cookieService.set(KEYS.CUSTOM_DEADLINE, JSON.stringify(deadline));
+    localStorage.setItem(KEYS.CUSTOM_DEADLINE, JSON.stringify(deadline));
     this.cookieChanged.next(CookieChangedEvent.CUSTOM_DEADLINE);
   }
 
   setCustomDeadlineStatus(customDeadlineStatus: CustomDeadlineState) {
-    this.cookieService.set(KEYS.CUSTOM_DEADLINE_STATE, customDeadlineStatus);
+    localStorage.setItem(KEYS.CUSTOM_DEADLINE_STATE, customDeadlineStatus);
     this.cookieChanged.next(CookieChangedEvent.CUSTOM_DEADLINE_STATE);
   }
 
   getCustomDeadlineStatus(): CustomDeadlineState {
-    let exists = this.cookieService.check(KEYS.CUSTOM_DEADLINE_STATE);
+    let exists = this.check(KEYS.CUSTOM_DEADLINE_STATE);
 
     if (exists) {
-      return this.cookieService.get(KEYS.CUSTOM_DEADLINE_STATE) as CustomDeadlineState;
+      return localStorage.getItem(KEYS.CUSTOM_DEADLINE_STATE) as CustomDeadlineState;
     }
     else {
       return CustomDeadlineState.UNDEFINED;
@@ -66,10 +70,10 @@ export class DeadlineCookieService {
   }
 
   getDefaultDeadlineType(): DefaultDeadlineType {
-    let exists = this.cookieService.check(KEYS.DEFAULT_DEADLINE_TYPE);
+    let exists = this.check(KEYS.DEFAULT_DEADLINE_TYPE);
 
     if (exists) {
-      return this.cookieService.get(KEYS.DEFAULT_DEADLINE_TYPE) as DefaultDeadlineType;
+      return localStorage.getItem(KEYS.DEFAULT_DEADLINE_TYPE) as DefaultDeadlineType;
     }
     else {
       return DefaultDeadlineType.BACHELOR;
@@ -77,7 +81,7 @@ export class DeadlineCookieService {
   }
 
   setDefaultDeadlineType(type: DefaultDeadlineType) {
-    this.cookieService.set(KEYS.DEFAULT_DEADLINE_TYPE, type);
+    localStorage.setItem(KEYS.DEFAULT_DEADLINE_TYPE, type);
     this.cookieChanged.next(CookieChangedEvent.DEFAULT_DEADLINE_TYPE);
   }
 }
