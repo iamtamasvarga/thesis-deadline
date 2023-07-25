@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { DeadlineType, DefaultDeadlineType } from '@models/deadline.model';
+import { DeadlineCookieService } from '@services/deadline-cookie.service';
 import { LocalService } from '@services/local.service';
 import { KEYS, parseStringToBool } from '@shared/const';
-import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-deadline-toggler',
@@ -10,34 +11,18 @@ import { Output, EventEmitter } from '@angular/core';
 })
 export class DeadlineTogglerComponent implements OnInit {
   deadlineType: boolean = false;
-  @Output() deadlineTypeEvent = new EventEmitter<boolean>();
   
-  constructor(private local: LocalService) {
+  constructor(private deadlineCookieService: DeadlineCookieService) {
   }
 
   ngOnInit() {
-    let value = this.local.getData(KEYS.DEADLINE_TOGGLE);
-    if(value === null)
-    {
-      this.local.saveData(KEYS.DEADLINE_TOGGLE, this.deadlineType.toString());
-    }
-    else
-    {
-      try
-      {
-        this.deadlineType = parseStringToBool(value);
-        this.toggleHandler();
-      }
-      catch(e: unknown)
-      {
-        console.error(e);
-      }
-    }
+    let type = this.deadlineCookieService.getDefaultDeadlineType();
+    
+    this.deadlineType = type === DefaultDeadlineType.MASTER ? true : false;
   }
 
   toggleHandler(): void {
-    this.deadlineTypeEvent.emit(this.deadlineType);
-    this.local.saveData(KEYS.DEADLINE_TOGGLE, this.deadlineType.toString());
+    const type = this.deadlineType ? DefaultDeadlineType.MASTER : DefaultDeadlineType.BACHELOR; 
+    this.deadlineCookieService.setDefaultDeadlineType(type);
   }
-
 }

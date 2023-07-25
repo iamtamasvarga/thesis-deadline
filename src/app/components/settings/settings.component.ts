@@ -122,6 +122,7 @@ export class SettingsComponent implements OnInit {
   }
 
   submitNoDeadlines() {
+    return;
     this.customDeadlineState = CustomDeadlineState.SUBMITTED;
   }
 
@@ -176,5 +177,3 @@ export class SettingsComponent implements OnInit {
 // -  check responsiveness
 // -  last date... disable next and show error if not correct... otherwise enable submit (no need, optional)
 // - delete custom deadline
-// - no custom deadline warning
-// - subscribe to custom deadline event in counter

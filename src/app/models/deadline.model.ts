@@ -11,3 +11,7 @@ export enum DeadlineType {
 export enum CustomDeadlineState {
   UNDEFINED = "UNDEFINED", SUBMITTED = "SUBMITTED", CREATED = "CREATED"
 }
+
+export enum DefaultDeadlineType {
+  BACHELOR = "BACHELOR", MASTER = "MASTER"
+}

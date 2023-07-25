@@ -31,15 +31,10 @@
   <div *ngIf="loadingCounter" class="container center noDeadline">
     LOADING
   </div>
-  <div *ngIf="!loadingCounter" #noDeadline class="container center noDeadline">
+  <div *ngIf="!loadingCounter && currentDeadlines.length !== 0" #noDeadline class="container center noDeadline">
     IT'S OVER
   </div>
-</ng-template>
-<ng-template #noCustomDeadline>
-  <div *ngIf="loadingCounter" class="container center noDeadline">
-    LOADING
-  </div>
-  <div *ngIf="!loadingCounter" #noDeadline class="container center noDeadline">
-    IT'S OVER
+  <div *ngIf="!loadingCounter && customDeadline && currentDeadlines.length === 0" class="container center noDeadline">
+    NO CUSTOM DEADLINE
   </div>
 </ng-template>

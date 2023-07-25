@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { CustomDeadlineState, Deadline, DeadlineType } from '@models/deadline.model';
+import { CustomDeadlineState, Deadline, DeadlineType, DefaultDeadlineType } from '@models/deadline.model';
 import { CookieService } from 'ngx-cookie-service';
 import { KEYS } from '@shared/const';
 import { Subject } from 'rxjs';
 
 export enum CookieChangedEvent {
-  DEADLINE_TYPE = "DEADLINE_TYPE", CUSTOM_DEADLINE = "CUSTOM_DEADLINE", CUSTOM_DEADLINE_STATE = "CUSTOM_DEADLINE_STATE"
+  DEADLINE_TYPE = "DEADLINE_TYPE", CUSTOM_DEADLINE = "CUSTOM_DEADLINE", CUSTOM_DEADLINE_STATE = "CUSTOM_DEADLINE_STATE", DEFAULT_DEADLINE_TYPE = "DEFAULT_DEADLINE_TYPE"
 }
 
 @Injectable({
@@ -63,5 +63,21 @@ export class DeadlineCookieService {
     else {
       return CustomDeadlineState.UNDEFINED;
     }
+  }
+
+  getDefaultDeadlineType(): DefaultDeadlineType {
+    let exists = this.cookieService.check(KEYS.DEFAULT_DEADLINE_TYPE);
+
+    if (exists) {
+      return this.cookieService.get(KEYS.DEFAULT_DEADLINE_TYPE) as DefaultDeadlineType;
+    }
+    else {
+      return DefaultDeadlineType.BACHELOR;
+    }
+  }
+
+  setDefaultDeadlineType(type: DefaultDeadlineType) {
+    this.cookieService.set(KEYS.DEFAULT_DEADLINE_TYPE, type);
+    this.cookieChanged.next(CookieChangedEvent.DEFAULT_DEADLINE_TYPE);
   }
 }

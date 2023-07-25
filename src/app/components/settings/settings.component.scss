@@ -18,13 +18,13 @@
     flex-direction: column;
     gap: 1em;
     position: relative;
-    align-items: baseline;
+    align-items: center;
     // height: 30vh;
 
     @media only screen and (min-width: 30em) {
       padding-top: 0;
       // height: 20vh;
-      align-items: center;
+      // align-items: center;
       // justify-content: center;
     }
 

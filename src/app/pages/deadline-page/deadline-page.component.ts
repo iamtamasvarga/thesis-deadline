@@ -9,7 +9,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./deadline-page.component.scss'],
 })
 export class DeadlinePageComponent implements OnInit, OnDestroy {
-  deadlineType: boolean = false;
   defaultDeadlines: boolean = true;
   cookieServiceSubscription!: Subscription;
 
@@ -28,10 +27,6 @@ export class DeadlinePageComponent implements OnInit, OnDestroy {
 
   getDeadlineType() {
     this.defaultDeadlines = this.deadlineCookieService.getDeadlineType() == DeadlineType.DEFAULT;
-  }
-
-  deadlineTypeHandler(deadlineType: boolean): void {
-    this.deadlineType = deadlineType;
   }
 
   ngOnDestroy(): void {
