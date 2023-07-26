@@ -22,7 +22,7 @@ export class SettingsComponent implements OnInit {
   defaultDeadlines: boolean = true; //cache
   selectedDegree: Degree = Degree.INF;
   availableDegrees: Degree[] = [];
-  visible: boolean = true;
+  visible: boolean = false;
 
   customDeadlineState: CustomDeadlineState = CustomDeadlineState.UNDEFINED; //cache
   minDate: Date = new Date();
