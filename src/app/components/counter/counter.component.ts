@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CounterModel } from '@models/counter.model';
-import { Deadline, DeadlineType, DefaultDeadlineType } from '@models/deadline.model';
+import { CustomDeadlineState, Deadline, DeadlineType, DefaultDeadlineType } from '@models/deadline.model';
 import { CookieChangedEvent, DeadlineCookieService } from '@services/deadline-cookie.service';
 import { bachelorDeadlines } from '@shared/bachelor.deadline';
 import { Counter } from '@shared/counter';
@@ -72,13 +72,15 @@ export class CounterComponent implements OnInit, OnDestroy {
 
   private setCustomDeadline() {
     const deadlineType = this.deadlineCookieService.getDeadlineType();
-    if (deadlineType === DeadlineType.DEFAULT)
-    {
+    if (deadlineType === DeadlineType.DEFAULT) {
       this.setDefaultDeadline();
       this.customDeadline = false;
       return;
     }
-    
+
+    const customDeadlineState = this.deadlineCookieService.getCustomDeadlineState();
+
+
     this.currentDeadlines = this.deadlineCookieService.getCustomDeadline();
     this.customDeadlines = this.currentDeadlines;
     this.customDeadline = true;

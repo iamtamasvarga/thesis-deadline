@@ -22,7 +22,7 @@ export class SettingsComponent implements OnInit {
   defaultDeadlines: boolean = true; //cache
   selectedDegree: Degree = Degree.INF;
   availableDegrees: Degree[] = [];
-  visible: boolean = false;
+  visible: boolean = true;
 
   customDeadlineState: CustomDeadlineState = CustomDeadlineState.UNDEFINED; //cache
   minDate: Date = new Date();
@@ -45,7 +45,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.defaultDeadlines = this.deadlineCookieService.getDeadlineType() == DeadlineType.DEFAULT;
-    this.customDeadlineState = this.deadlineCookieService.getCustomDeadlineStatus() as CustomDeadlineState;
+    this.customDeadlineState = this.deadlineCookieService.getCustomDeadlineState() as CustomDeadlineState;
   }
 
   showDialog() {
@@ -122,7 +122,6 @@ export class SettingsComponent implements OnInit {
   }
 
   submitNoDeadlines() {
-    return;
     this.customDeadlineState = CustomDeadlineState.SUBMITTED;
   }
 
@@ -145,15 +144,21 @@ export class SettingsComponent implements OnInit {
 
     this.deadlineCookieService.setCustomDeadline(deadlines);
     this.customDeadlineState = CustomDeadlineState.CREATED;
-    this.deadlineCookieService.setCustomDeadlineStatus(this.customDeadlineState);
+    this.deadlineCookieService.setCustomDeadlineState(this.customDeadlineState);
+    this.deadlineCookieService.setDeadlineType(DeadlineType.CUSTOM);
   }
 
   resetCustomDeadlines() {
+    this.customDeadlineState = CustomDeadlineState.UNDEFINED;
     this.deadlineIndex = 0;
     this.customDeadlines = [];
     this.currentDate = undefined;
     this.prevButtonDisabled = true;
     this.nextButtonDisabled = true;
+
+    this.deadlineCookieService.setCustomDeadline([]);
+    this.deadlineCookieService.setCustomDeadlineState(this.customDeadlineState);
+    this.deadlineCookieService.setDeadlineType(DeadlineType.CUSTOM);
   }
 
   IsDateDefined() {
