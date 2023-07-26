@@ -149,6 +149,7 @@ export class SettingsComponent implements OnInit {
   }
 
   resetCustomDeadlines() {
+    this.submitButtonDisabled = true;
     this.customDeadlineState = CustomDeadlineState.UNDEFINED;
     this.deadlineIndex = 0;
     this.customDeadlines = [];
@@ -175,6 +176,16 @@ export class SettingsComponent implements OnInit {
 
   deadlineCheckboxChanged() {
     this.deadlineCookieService.setDeadlineType(this.defaultDeadlines ? DeadlineType.DEFAULT : DeadlineType.CUSTOM);
+  }
+
+  dialogHideHandler() {
+    if (this.defaultDeadlines)
+      return;
+
+    if (this.customDeadlineState === CustomDeadlineState.CREATED)
+      return;
+
+    this.resetCustomDeadlines();
   }
 }
 
