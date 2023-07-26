@@ -56,6 +56,21 @@
       }
     }
   }
+
+  .custom-deadline-reset {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding-top: 1em;
+ 
+    p-button {
+      align-self: center;
+    }
+
+    @media only screen and (min-width: 30em) {
+      padding-top: 0;
+    }
+  }
 }
 
 :host ::ng-deep input.p-inputnumber-input {

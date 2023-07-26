@@ -37,7 +37,17 @@ export class DeadlineCookieService {
 
     if (exists) {
       const customDeadline = this.cookieService.get(KEYS.CUSTOM_DEADLINE);
-      return JSON.parse(customDeadline);
+      
+      let parsedCustomDeadline = [...JSON.parse(customDeadline)];
+
+      for(let i = 0, len = parsedCustomDeadline.length; i < len; i++)
+      {
+        const deadline_date_string: string = parsedCustomDeadline[i].deadline_date;
+
+        parsedCustomDeadline[i].deadline_date = new Date(deadline_date_string);
+      }
+      
+      return parsedCustomDeadline;
     }
     else {
       return [];
@@ -49,12 +59,12 @@ export class DeadlineCookieService {
     this.cookieChanged.next(CookieChangedEvent.CUSTOM_DEADLINE);
   }
 
-  setCustomDeadlineStatus(customDeadlineStatus: CustomDeadlineState) {
+  setCustomDeadlineState(customDeadlineStatus: CustomDeadlineState) {
     this.cookieService.set(KEYS.CUSTOM_DEADLINE_STATE, customDeadlineStatus);
     this.cookieChanged.next(CookieChangedEvent.CUSTOM_DEADLINE_STATE);
   }
 
-  getCustomDeadlineStatus(): CustomDeadlineState {
+  getCustomDeadlineState(): CustomDeadlineState {
     let exists = this.cookieService.check(KEYS.CUSTOM_DEADLINE_STATE);
 
     if (exists) {

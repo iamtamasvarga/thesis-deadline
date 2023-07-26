@@ -17,7 +17,7 @@
           spinnerMode="horizontal" [step]="1" [min]="1" decrementButtonClass="p-button-danger"
           incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
           decrementButtonIcon="pi pi-minus"></p-inputNumber>
-        <p-button label="Submit" [disabled]="true" (click)="submitNoDeadlines()"></p-button>
+        <p-button label="Submit" (click)="submitNoDeadlines()"></p-button>
       </div>
     </ng-template>
   </div>
@@ -36,7 +36,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="customDeadlineState === CustomDeadlineStateEnum.CREATED">
-    SUBMITTED
+  <div *ngIf="customDeadlineState === CustomDeadlineStateEnum.CREATED" class="custom-deadline-reset">
+      <p-button label="Reset" styleClass="p-button-danger" (click)="resetCustomDeadlines()"></p-button>
   </div>
 </p-dialog>
