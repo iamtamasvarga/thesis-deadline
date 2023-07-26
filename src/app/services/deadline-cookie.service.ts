@@ -15,7 +15,7 @@ export class DeadlineCookieService {
   cookieChanged = new Subject<CookieChangedEvent>();
 
   constructor(private cookieService: CookieService) { }
-
+  
   getDeadlineType(): DeadlineType {
     let exists = this.cookieService.check(KEYS.DEADLINE_TYPE);
 
