@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DeadlineType } from '@models/deadline.model';
 import { CookieChangedEvent, DeadlineCookieService } from '@services/deadline-cookie.service';
+import { ThemeCookieService } from '@services/theme-cookie.service';
+import { Theme } from '@shared/theme';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,8 +13,9 @@ import { Subscription } from 'rxjs';
 export class DeadlinePageComponent implements OnInit, OnDestroy {
   defaultDeadlines: boolean = true;
   cookieServiceSubscription!: Subscription;
+  themeServiceSubscription!: Subscription;
 
-  constructor(private deadlineCookieService: DeadlineCookieService) {}
+  constructor(private deadlineCookieService: DeadlineCookieService, private themeCookieService: ThemeCookieService) {}
 
   ngOnInit() {
     this.getDeadlineType();
@@ -22,7 +25,11 @@ export class DeadlinePageComponent implements OnInit, OnDestroy {
 
       if(event === CookieChangedEvent.DEADLINE_TYPE)
         this.getDeadlineType();
-    })
+    });
+
+    this.themeServiceSubscription = this.themeCookieService.themeChanged.subscribe(theme => {
+      this.selectTheme(theme);
+    });
   }
 
   getDeadlineType() {
@@ -30,6 +37,11 @@ export class DeadlinePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.cookieServiceSubscription.unsubscribe();
+    this.cookieServiceSubscription?.unsubscribe();
+    this.themeServiceSubscription?.unsubscribe();
+  }
+
+  selectTheme(theme: Theme) {
+    console.log(theme);
   }
 }

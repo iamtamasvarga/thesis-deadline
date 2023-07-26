@@ -3,6 +3,9 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { Degree } from '@models/degree.enum'
 import { DeadlineCookieService } from '@services/deadline-cookie.service';
 import { Deadline, DeadlineType, CustomDeadlineState } from '@models/deadline.model';
+import { Subscription } from 'rxjs';
+import { ThemeCookieService } from '@services/theme-cookie.service';
+import { Theme } from '@shared/theme';
 
 @Component({
   selector: 'app-settings',
@@ -24,6 +27,9 @@ export class SettingsComponent implements OnInit {
   availableDegrees: Degree[] = [];
   visible: boolean = false;
 
+  themes: Theme[] = [];
+  selectedTheme!: Theme;
+
   customDeadlineState: CustomDeadlineState = CustomDeadlineState.UNDEFINED; //cache
   minDate: Date = new Date();
   CustomDeadlineStateEnum = CustomDeadlineState;
@@ -39,13 +45,15 @@ export class SettingsComponent implements OnInit {
     this.state = (this.state === 'default' ? 'rotated' : 'default');
   }
 
-  constructor(private deadlineCookieService: DeadlineCookieService) {
+  constructor(private deadlineCookieService: DeadlineCookieService, private themeCookieService: ThemeCookieService) {
     this.availableDegrees = Object.values(Degree);
   }
 
   ngOnInit() {
     this.defaultDeadlines = this.deadlineCookieService.getDeadlineType() == DeadlineType.DEFAULT;
     this.customDeadlineState = this.deadlineCookieService.getCustomDeadlineState() as CustomDeadlineState;
+    this.themes = this.themeCookieService.getThemes();
+    this.selectedTheme = this.themeCookieService.getCurrentTheme();
   }
 
   showDialog() {
@@ -187,9 +195,12 @@ export class SettingsComponent implements OnInit {
 
     this.resetCustomDeadlines();
   }
+
+  themeChanged() {
+    this.themeCookieService.setTheme(this.selectedTheme);
+  }
 }
 
 // TODO:
 // -  check responsiveness
 // -  last date... disable next and show error if not correct... otherwise enable submit (no need, optional)
-// - delete custom deadline

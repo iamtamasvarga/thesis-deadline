@@ -12,6 +12,16 @@
 }
 
 .dialog {
+  .theme-settings {
+    display: flex;
+    justify-content: center;
+    margin: 1.5em 0;
+
+    span {
+      width: 60%;
+    }
+  }
+
   .dialog-content {
     padding-top: 1em;
     display: flex;
@@ -62,7 +72,7 @@
     flex-direction: column;
     gap: 1em;
     padding-top: 1em;
- 
+
     p-button {
       align-self: center;
     }

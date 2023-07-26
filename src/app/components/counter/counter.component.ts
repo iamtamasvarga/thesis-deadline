@@ -97,6 +97,6 @@ export class CounterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.cookieServiceSubscription.unsubscribe();
+    this.cookieServiceSubscription?.unsubscribe();
   }
 }
