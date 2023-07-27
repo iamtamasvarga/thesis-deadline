@@ -12,8 +12,10 @@ import { Subscription } from 'rxjs';
 })
 export class DeadlinePageComponent implements OnInit, OnDestroy {
   defaultDeadlines: boolean = true;
+  selectedTheme: Theme = Theme.BLANK;
   cookieServiceSubscription!: Subscription;
   themeServiceSubscription!: Subscription;
+  Theme = Theme;
 
   constructor(private deadlineCookieService: DeadlineCookieService, private themeCookieService: ThemeCookieService) {}
 
@@ -30,6 +32,9 @@ export class DeadlinePageComponent implements OnInit, OnDestroy {
     this.themeServiceSubscription = this.themeCookieService.themeChanged.subscribe(theme => {
       this.selectTheme(theme);
     });
+
+    const currentTheme = this.themeCookieService.getCurrentTheme();
+    this.selectTheme(currentTheme);
   }
 
   getDeadlineType() {
@@ -42,6 +47,6 @@ export class DeadlinePageComponent implements OnInit, OnDestroy {
   }
 
   selectTheme(theme: Theme) {
-    console.log(theme);
+    this.selectedTheme = theme;
   }
 }
