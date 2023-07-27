@@ -1,5 +1,6 @@
 <div class="content">
-    <app-deadline-toggler *ngIf="defaultDeadlines"></app-deadline-toggler>
-    <app-counter></app-counter>
-    <app-settings></app-settings>
+  <app-deadline-toggler *ngIf="defaultDeadlines"></app-deadline-toggler>
+  <app-counter></app-counter>
+  <app-settings></app-settings>
 </div>
+<app-baloons *ngIf="selectedTheme === Theme.BALOONS" class="background"></app-baloons>
