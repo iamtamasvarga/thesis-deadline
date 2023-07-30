@@ -5,7 +5,7 @@ export enum Theme {
   // EMOJI_RAIN = "EMOJI_RAIN",
   // GLITCH_TEXT = "GLITCH_TEXT",
   // HOUR_GLASS = "HOUR_GLASS",
-  // MATRIX = "MATRIX",
+  MATRIX = "MATRIX",
   // NEON = "NEON",
   // SLIDING_TEXT = "SLIDING_TEXT",
   // CHRISTMAS = "CHRISTMAS",
